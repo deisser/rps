@@ -1,0 +1,75 @@
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+        .content {
+            padding: 5% 25% 0 25%;
+        }
+
+        #score {
+            overflow: hidden;
+            padding-left: 1.1rem;
+            padding-right: 1.1rem;
+        }
+
+        #main {
+            border: 1px solid #ccc !important;
+            padding: 1rem 16px;
+            border-radius: 16px;
+        }
+
+        .btn-wrapper {
+            display: flex;
+        }
+
+        .btn,
+        .center {
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .reset {
+            padding-top: 1rem;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="content">
+
+        <div id="score">
+            <score v-for="item in score" v-bind:score="item" v-bind:key="item.user" v-on:click.native="test(item)" v-bind:style="{ float: item.float }">
+            </score>
+        </div>
+
+        <div id="main" v-bind:style="{ background: result.background }">
+
+            <div class="btn-wrapper">
+                <user-input v-for="item in rpsList" v-bind:rps="item" v-bind:key="item.id" v-on:click.native="startRps(item)">
+                </user-input>
+            </div>
+
+            <div class="center" v-show="computerEl">
+                <p>Computer: {{computerEl}}</p>
+            </div>
+
+            <div class="center" v-show="result.value">
+                <p>{{result.value}}</p>
+            </div>
+        </div>
+
+        <div id="reset">
+            <div class="btn reset">
+                <button type="button" @click="reset">Reset</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./index.js"></script>
+
+</body>
